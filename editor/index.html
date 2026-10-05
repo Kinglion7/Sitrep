@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Wolfpack Editor</title>
+<link rel="stylesheet" href="../assets/fonts/fonts.css">
+<link rel="stylesheet" href="../assets/css/wolfpack.css">
+<link rel="stylesheet" href="../assets/css/ui.css">
+</head>
+<body class="ed">
+
+<header class="ui-bar ui-noprint">
+  <div class="ui-brand">WOLFPACK <span>editor</span></div>
+  <span class="ui-id" id="issueId">—</span>
+  <div class="ui-actions">
+    <button class="ui-btn" id="btnNew" title="Start the next issue from this one (dates and numbers advance two weeks)">New issue</button>
+    <button class="ui-btn" id="btnOpen" title="Open a saved draft (.json)">Open draft</button>
+    <button class="ui-btn" id="btnSave" title="Download this draft as JSON">Save draft</button>
+    <button class="ui-btn" id="btnOpenEnc" title="Open a published issue (.enc) with its passphrase">Open published</button>
+    <select class="ui-select" id="zoom" title="Preview zoom">
+      <option value="fit">Fit</option><option value="0.5">50%</option><option value="0.75">75%</option><option value="1">100%</option>
+    </select>
+    <button class="ui-btn" id="btnPdf" title="Print the pages to PDF (Letter, no margins)">Export PDF</button>
+    <button class="ui-btn" id="btnEmail" title="Generate the email version">Email HTML</button>
+    <button class="ui-btn ui-btn--gold" id="btnPublish" title="Encrypt this issue for the website">Publish</button>
+  </div>
+</header>
+
+<main class="ed-main">
+  <aside class="ed-form ui-noprint">
+    <div id="form"></div>
+    <div class="ed-status" id="status"></div>
+  </aside>
+  <section class="ed-preview" id="previewPane">
+    <div class="wp-stage" id="stage"></div>
+  </section>
+</main>
+
+<input type="file" id="fileDraft" accept="application/json,.json" hidden>
+<input type="file" id="fileEnc" accept=".enc" hidden>
+<input type="file" id="filePhoto" accept="image/*" hidden>
+
+<dialog class="ui-dlg ui-noprint" id="dlgEmail">
+  <div class="ui-dlg__head">Email version</div>
+  <div class="ui-dlg__body">
+    <div class="ui-note">Paste into a new message in Outlook (Insert as HTML) or download the file and open it, select all, copy, and paste into the message body. Gmail web drops the cover image; the text, link and layout survive.</div>
+    <textarea id="emailHtml" spellcheck="false"></textarea>
+  </div>
+  <div class="ui-dlg__foot">
+    <button class="ui-btn" id="emailPreview">Preview</button>
+    <button class="ui-btn" id="emailDownload">Download .html</button>
+    <button class="ui-btn ui-btn--gold" id="emailCopy">Copy HTML</button>
+    <button class="ui-btn" data-close>Close</button>
+  </div>
+</dialog>
+
+<dialog class="ui-dlg ui-noprint" id="dlgPublish">
+  <div class="ui-dlg__head">Publish issue</div>
+  <div class="ui-dlg__body">
+    <div id="pubChecks"></div>
+    <div class="ui-note">The issue is encrypted in this browser with the passphrase below. The website and the GitHub repo only ever hold the encrypted file. Families need this same passphrase to read it, so use one passphrase for every issue and share it in person or by text, not in the email.</div>
+    <label>Passphrase (10+ characters, not digits only)<input type="password" id="pubPass" autocomplete="off"></label>
+    <label>Repeat passphrase<input type="password" id="pubPass2" autocomplete="off"></label>
+    <div id="pubResult"></div>
+  </div>
+  <div class="ui-dlg__foot">
+    <button class="ui-btn" data-close>Cancel</button>
+    <button class="ui-btn ui-btn--gold" id="pubGo">Encrypt &amp; download</button>
+  </div>
+</dialog>
+
+<dialog class="ui-dlg ui-noprint" id="dlgPass">
+  <div class="ui-dlg__head">Passphrase</div>
+  <div class="ui-dlg__body">
+    <div class="ui-note" id="passNote">Enter the passphrase this issue was published with.</div>
+    <input type="password" id="passIn" autocomplete="off">
+    <div id="passErr"></div>
+  </div>
+  <div class="ui-dlg__foot">
+    <button class="ui-btn" data-close>Cancel</button>
+    <button class="ui-btn ui-btn--gold" id="passGo">Open</button>
+  </div>
+</dialog>
+
+<div class="ui-toast" id="toast"></div>
+
+<script src="../assets/js/schema.js"></script>
+<script src="../assets/js/crypto.js"></script>
+<script src="../assets/js/templates.js"></script>
+<script src="../assets/js/photos.js"></script>
+<script src="../assets/js/email.js"></script>
+<script src="../assets/js/editor.js"></script>
+</body>
+</html>

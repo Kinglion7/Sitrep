@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#141412">
+<title>Wolfpack Newsletter</title>
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<link rel="stylesheet" href="assets/css/wolfpack.css">
+<link rel="stylesheet" href="assets/css/ui.css">
+</head>
+<body class="vw">
+<div class="vw-wrap">
+  <header class="vw-head ui-noprint">
+    <div class="vw-mast">WOLFPACK</div>
+    <div class="vw-unit">259th HR Company · DSTB · 25th Infantry Division · SFRG newsletter</div>
+  </header>
+
+  <section class="vw-card ui-noprint" id="cardPass" hidden>
+    <h2>Enter the newsletter passphrase</h2>
+    <p class="ui-note">Your SFRG lead shared it with you. It is the same for every issue.</p>
+    <form id="formPass">
+      <input type="password" id="pass" autocomplete="current-password" placeholder="Passphrase" required>
+      <div id="passErr" style="margin-top:8px"></div>
+      <div style="margin-top:10px;display:flex;gap:8px;align-items:center">
+        <button class="ui-btn" type="submit">Open</button>
+        <label class="ui-note"><input type="checkbox" id="remember"> Remember on this device</label>
+      </div>
+    </form>
+  </section>
+
+  <section class="vw-card ui-noprint" id="cardList" hidden>
+    <h2>Issues</h2>
+    <ul class="vw-list" id="list"></ul>
+    <div class="vw-empty" id="empty" hidden>No issues have been published yet.</div>
+    <div style="margin-top:12px;text-align:right"><button class="ui-btn ui-btn--ghost" id="btnLock" type="button" style="background:#fff;color:#1c1b18;border-color:#d6ccbb">Forget passphrase</button></div>
+  </section>
+
+  <section id="issue" hidden>
+    <div class="vw-tools ui-noprint">
+      <button class="ui-btn" id="btnBack" type="button">&larr; All issues</button>
+      <button class="ui-btn" id="btnPdf" type="button">Download PDF</button>
+      <button class="ui-btn" id="btnEmail" type="button">Email version</button>
+    </div>
+    <div class="wp-stage vw-stage" id="stage"></div>
+  </section>
+
+  <div class="vw-empty ui-noprint" id="loading">Loading…</div>
+</div>
+<div class="ui-toast" id="toast"></div>
+
+<script src="assets/js/schema.js"></script>
+<script src="assets/js/crypto.js"></script>
+<script src="assets/js/templates.js"></script>
+<script src="assets/js/email.js"></script>
+<script src="assets/js/viewer.js"></script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+# Local-only material: plaintext drafts, original photos, the design export.
+# Nothing in here may be committed: the repo is public.
+drafts/
+*.jpg
+*.jpeg
+*.png
+*.webp
+Wolfpack Newsletter (standalone).html
+.DS_Store
+Thumbs.db
